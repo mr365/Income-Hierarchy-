@@ -117,19 +117,29 @@ function yValue (list_id, y){
 
   d3.selectAll('g').on("click", function(){
     var that = d3.select(this);
-    var active_rect = d3.select(this).select('rect');
-    var id = d3.select(this).attr('id');
+
+    var active_rect = that.select('rect')
+                        .attr('width', '960')
+                        .attr('height','600')
+                        .attr('x','0')
+                        .attr('y','0');
+
+    var circles =that.select('rect').selectAll('circle');  
+    console.log(circles);                  
+    var id = that.attr('id');
     
     var list_active = id+"_list";
-    // var list_id_active = "g#"+id;
-    console.log(active_rect + " active_rect");
-    // console.log(list_id_active);
+    var list_id_active = "g#"+id;
+    // console.log(active_rect + " active_rect");
+    
 
-    d3.selectAll('g').remove();
-    draw_rect( 0, 0, "green", id);
-    d3.select('g#'+id).select('rect').attr('width','960').attr('height','600');
+    d3.selectAll('g').style("visibility", "hidden");
+    that.style("visibility", "visible");
+    // console.log(that);
+    // draw_rect( 0, 0, "green", id);
+    // d3.select('g#'+id).select('rect').attr('width','960').attr('height','600');
+    // active_rect.attr('width','960').attr('height','600').style('fill','green');
     drawNodes(id+"_list", "g#"+id, 0, 0 );
-
   });
 });
 
